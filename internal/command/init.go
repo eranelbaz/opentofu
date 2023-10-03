@@ -100,7 +100,7 @@ func (c *InitCommand) Run(args []string) int {
 
 	// Validate the arg count and get the working directory
 	args = cmdFlags.Args()
-	path, err := ModulePath(args)
+	path, err := modulePath(args)
 	if err != nil {
 		c.Ui.Error(err.Error())
 		return 1
@@ -1181,7 +1181,9 @@ Options:
                           See the documentation on configuring OpenTofu with
                           Terraform Cloud for more information.
 
-  -test-directory=path    Set the OpenTofu test directory, defaults to "tests".
+  -test-directory=path    Set the OpenTofu test directory, defaults to "tests". When set, the
+                          test command will search for test files in the current directory and
+                          in the one specified by the flag.
 
 `
 	return strings.TrimSpace(helpText)

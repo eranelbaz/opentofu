@@ -35,7 +35,7 @@ func (c *GetCommand) Run(args []string) int {
 	ctx, done := c.InterruptibleContext(c.CommandContext())
 	defer done()
 
-	path, err := ModulePath(cmdFlags.Args())
+	path, err := modulePath(cmdFlags.Args())
 	if err != nil {
 		c.Ui.Error(err.Error())
 		return 1
@@ -75,7 +75,9 @@ Options:
 
   -no-color             Disable text coloring in the output.
 
-  -test-directory=path	Set the OpenTofu test directory, defaults to "tests".
+  -test-directory=path  Set the OpenTofu test directory, defaults to "tests". When set, the
+                        test command will search for test files in the current directory and
+                        in the one specified by the flag.
 
 `
 	return strings.TrimSpace(helpText)
